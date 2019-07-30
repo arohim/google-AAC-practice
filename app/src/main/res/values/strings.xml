@@ -1,4 +1,13 @@
 <resources>
     <string name="app_name">My Application</string>
     <string name="action_settings">Settings</string>
+
+    <string name="high_priority">High priority</string>
+    <string name="no_due_date">No due date</string>
+
+    <!--Additional accessibility contentDescriptions (some just use existing strings above)-->
+    <string name="high_priority_task_red_star">Red star for high priority task</string>
+    <string name="medium_priority_task_orange_star">Orange star for medium priority task</string>
+    <string name="low_priority_task_yellow_star">Yellow star for low priority task</string>
+    <string name="completed_task_grey_star">Grey star for completed task</string>
 </resources>
