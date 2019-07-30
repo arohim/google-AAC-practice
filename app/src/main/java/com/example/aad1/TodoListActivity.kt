@@ -6,7 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
 
-import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.activity_todo_list.*
 
 class TodoListActivity : AppCompatActivity() {
 
@@ -14,7 +14,7 @@ class TodoListActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setContentView(R.layout.activity_todo_list)
         setSupportActionBar(toolbar)
 
         fab.setOnClickListener { view ->
