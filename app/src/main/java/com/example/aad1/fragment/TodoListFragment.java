@@ -9,6 +9,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.NavDirections;
 import androidx.navigation.Navigation;
 import androidx.navigation.fragment.NavHostFragment;
 import androidx.recyclerview.widget.DividerItemDecoration;
@@ -19,15 +20,6 @@ import com.example.aad1.R;
 import com.example.aad1.adapter.TodoListAdapter;
 import com.example.aad1.databinding.FragmentTodoListBinding;
 
-
-/**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link TodoListFragment.OnFragmentInteractionListener} interface
- * to handle interaction events.
- * Use the {@link TodoListFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
 public class TodoListFragment extends Fragment {
 
     FragmentTodoListBinding binding;
@@ -70,7 +62,8 @@ public class TodoListFragment extends Fragment {
         binding.fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                NavHostFragment.findNavController(TodoListFragment.this).navigate(R.id.add_or_edit_task);
+                NavDirections action = TodoListFragmentDirections.Companion.nextAction(1);
+                NavHostFragment.findNavController(TodoListFragment.this).navigate(action);
             }
         });
 
