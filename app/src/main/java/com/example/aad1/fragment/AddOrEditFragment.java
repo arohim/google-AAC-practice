@@ -9,8 +9,11 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
+import androidx.navigation.NavDirections;
+import androidx.navigation.fragment.NavHostFragment;
 
 import com.example.aad1.R;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 public class AddOrEditFragment extends Fragment {
 
@@ -27,6 +30,16 @@ public class AddOrEditFragment extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         mViewModel = ViewModelProviders.of(this).get(AddOrEditViewModel.class);
+
+        FloatingActionButton fab = getActivity().findViewById(R.id.fab);
+        fab.setImageResource(R.drawable.ic_done_black_24dp);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                NavDirections action = AddOrEditFragmentDirections.Companion.nextAction();
+                NavHostFragment.findNavController(AddOrEditFragment.this).navigate(action);
+            }
+        });
     }
 
 }

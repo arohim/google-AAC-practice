@@ -21,6 +21,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.aad1.R;
 import com.example.aad1.adapter.TodoListAdapter;
 import com.example.aad1.databinding.FragmentTodoListBinding;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 public class TodoListFragment extends Fragment {
 
@@ -62,7 +63,9 @@ public class TodoListFragment extends Fragment {
         DividerItemDecoration decorator = new DividerItemDecoration(getActivity(), DividerItemDecoration.VERTICAL);
         recyclerView.addItemDecoration(decorator);
 
-        binding.fab.setOnClickListener(new View.OnClickListener() {
+        FloatingActionButton fab = getActivity().findViewById(R.id.fab);
+        fab.setImageResource(R.drawable.ic_add_black_24dp);
+        fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 NavDirections action = TodoListFragmentDirections.Companion.nextAction(1);
