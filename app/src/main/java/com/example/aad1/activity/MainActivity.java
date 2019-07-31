@@ -36,8 +36,7 @@ public class MainActivity extends AppCompatActivity {
 
         NavController navController = ((NavHostFragment) navHostFragment).getNavController();
 
-        HashSet<Integer> topLevelDestinations = new HashSet<>(R.id.todo_list);
-        AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(topLevelDestinations)
+        AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(navController.getGraph())
                 .build();
 
         setActionBar(navController, appBarConfiguration);
