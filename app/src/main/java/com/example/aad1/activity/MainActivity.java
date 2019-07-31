@@ -1,7 +1,6 @@
 package com.example.aad1.activity;
 
 import android.os.Bundle;
-import android.view.Menu;
 import android.view.MenuItem;
 
 import androidx.annotation.Nullable;
@@ -16,8 +15,6 @@ import androidx.navigation.ui.NavigationUI;
 
 import com.example.aad1.R;
 import com.example.aad1.databinding.ActivityMainBinding;
-
-import java.util.HashSet;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -44,12 +41,6 @@ public class MainActivity extends AppCompatActivity {
 
     private void setActionBar(NavController navController, AppBarConfiguration appBarConfiguration) {
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return super.onCreateOptionsMenu(menu);
     }
 
     @Override
