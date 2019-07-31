@@ -30,6 +30,8 @@
             android:name="id"
             android:defaultValue="1"
             app:argType="integer" />
-
+        <action
+            android:id="@+id/next_action"
+            app:popUpTo="@id/todo_list" />
     </fragment>
 </navigation>
