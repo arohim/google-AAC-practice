@@ -12,7 +12,6 @@ import com.example.aad1.databinding.ActivityMainBinding;
 
 public class MainActivity extends AppCompatActivity {
 
-
     private ActivityMainBinding binding;
 
     @Override
@@ -26,4 +25,5 @@ public class MainActivity extends AppCompatActivity {
         getMenuInflater().inflate(R.menu.menu_main, menu);
         return super.onCreateOptionsMenu(menu);
     }
+
 }
