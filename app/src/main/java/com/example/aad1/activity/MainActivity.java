@@ -16,7 +16,7 @@ import com.example.aad1.adapter.TodoListAdapter;
 import com.example.aad1.databinding.ActivityTodoListBinding;
 import com.google.android.material.snackbar.Snackbar;
 
-public class TodoListActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity {
 
     ActivityTodoListBinding activityTodoListBinding;
     RecyclerView recyclerView;
