@@ -9,11 +9,30 @@
         android:id="@+id/todo_list"
         android:name="com.example.aad1.fragment.TodoListFragment"
         android:label="fragment_todo_list"
-        tools:layout="@layout/fragment_todo_list" />
+        tools:layout="@layout/fragment_todo_list">
+
+        <action
+            android:id="@+id/next_action"
+            app:destination="@+id/add_or_edit_task"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+    </fragment>
 
     <fragment
         android:id="@+id/add_or_edit_task"
         android:name="com.example.aad1.fragment.AddOrEditFragment"
         android:label="fragment_add_or_edit"
-        tools:layout="@layout/fragment_add_or_edit" />
+        tools:layout="@layout/fragment_add_or_edit">
+
+        <argument
+            android:name="id"
+            android:defaultValue="1"
+            app:argType="integer" />
+
+        <action
+            android:id="@+id/next_action"
+            app:destination="@+id/todo_list" />
+    </fragment>
 </navigation>

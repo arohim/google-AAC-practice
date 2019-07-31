@@ -7,7 +7,6 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.navigation.Navigation;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,10 +17,6 @@ import com.example.aad1.R;
 public class AddOrEditFragment extends Fragment {
 
     private AddOrEditViewModel mViewModel;
-
-    public static AddOrEditFragment newInstance() {
-        return new AddOrEditFragment();
-    }
 
     @Nullable
     @Override

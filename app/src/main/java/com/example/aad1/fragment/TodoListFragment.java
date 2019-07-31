@@ -1,8 +1,9 @@
 package com.example.aad1.fragment;
 
-import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -14,14 +15,9 @@ import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-
 import com.example.aad1.R;
 import com.example.aad1.adapter.TodoListAdapter;
 import com.example.aad1.databinding.FragmentTodoListBinding;
-import com.google.android.material.snackbar.Snackbar;
 
 
 /**
@@ -42,14 +38,6 @@ public class TodoListFragment extends Fragment {
 
     public TodoListFragment() {
         // Required empty public constructor
-    }
-
-    public static TodoListFragment newInstance() {
-        TodoListFragment fragment = new TodoListFragment();
-        Bundle args = new Bundle();
-//        args.putString(ARG_PARAM1, param1);
-        fragment.setArguments(args);
-        return fragment;
     }
 
     @Override
