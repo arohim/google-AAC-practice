@@ -25,12 +25,12 @@ public class TodoListAdapter extends RecyclerView.Adapter<TodoListAdapter.TodoLi
 
     @Override
     public void onBindViewHolder(@NonNull TodoListAdapterViewHolder holder, int position) {
-        holder.cbTodoDescription.setText("xxx");
+        holder.cbTodoDescription.setText("xxx xxxx xxxx xxx");
     }
 
     @Override
     public int getItemCount() {
-        return 10;
+        return 100;
     }
 
     public class TodoListAdapterViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
