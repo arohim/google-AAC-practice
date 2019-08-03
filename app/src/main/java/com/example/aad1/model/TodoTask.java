@@ -17,7 +17,7 @@ public class TodoTask implements Parcelable {
     public final static int LOW_PRIORITY = 2;
     public final static int TASK_COMPLETED = 1;
     public final static int TASK_NOT_COMPLETED = 0;
-    public final static long NO_DUE_DATE = 0;
+    public final static long NO_DUE_DATE = Long.MAX_VALUE;
 
     @PrimaryKey(autoGenerate = true)
     @NonNull

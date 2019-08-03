@@ -12,6 +12,8 @@ import androidx.sqlite.db.SupportSQLiteDatabase;
 import com.example.aad1.model.TodoTask;
 import com.example.aad1.model.TodoTaskDAO;
 
+import static com.example.aad1.model.TodoTask.NO_DUE_DATE;
+
 @Database(entities = {TodoTask.class}, version = 1, exportSchema = false)
 public abstract class TodoTaskRoomDatabase extends RoomDatabase {
 
@@ -50,11 +52,11 @@ public abstract class TodoTaskRoomDatabase extends RoomDatabase {
         private final TodoTaskDAO mDao;
 
         TodoTask[] todoTasks = {
-                new TodoTask("name", "description", 1, 0, 0),
-                new TodoTask("name2", "description2", 2, 0, 1),
-                new TodoTask("name3", "description3", 3, 0, 0),
-                new TodoTask("name4", "description4", 1, 0, 0),
-                new TodoTask("name5", "description5", 2, 0, 1),
+                new TodoTask("name", "description", 1, NO_DUE_DATE, 0),
+                new TodoTask("name2", "description2", 2, 1564825993, 1),
+                new TodoTask("name3", "description3", 3, 1564825993, 0),
+                new TodoTask("name4", "description4", 1, NO_DUE_DATE, 0),
+                new TodoTask("name5", "description5", 2, 1577836800, 1),
         };
 
         public PopulateDbAsync(TodoTaskRoomDatabase db) {
