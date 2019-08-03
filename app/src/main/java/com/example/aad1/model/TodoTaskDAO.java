@@ -16,6 +16,9 @@ public interface TodoTaskDAO {
     @Delete
     void delete(TodoTask todoTask);
 
+    @Query("DELETE FROM todoTask")
+    void deleteAll();
+
     @Update
     void update(TodoTask... todoTask);
 

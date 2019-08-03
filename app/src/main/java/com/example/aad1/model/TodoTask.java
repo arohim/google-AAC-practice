@@ -45,13 +45,11 @@ public class TodoTask implements Parcelable {
         this.description = null;
         this.priority = 0;
         this.dueDate = 0L;
-        this.id = 0;
         this.completed = 0;
         this.name = null;
     }
 
-    public TodoTask(int id, String name, String description, int priority, long dueDate, int completed) {
-        this.id = id;
+    public TodoTask(String name, String description, int priority, long dueDate, int completed) {
         this.name = name;
         this.description = description;
         this.priority = priority;
