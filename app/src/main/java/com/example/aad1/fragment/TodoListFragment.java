@@ -12,10 +12,8 @@ import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.navigation.NavDirections;
-import androidx.navigation.Navigation;
 import androidx.navigation.fragment.NavHostFragment;
 import androidx.paging.PagedList;
 import androidx.recyclerview.widget.DividerItemDecoration;
@@ -28,8 +26,6 @@ import com.example.aad1.databinding.FragmentTodoListBinding;
 import com.example.aad1.model.TodoTask;
 import com.example.aad1.model.TodoTaskViewModel;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-
-import java.util.List;
 
 public class TodoListFragment extends Fragment {
 
@@ -98,4 +94,5 @@ public class TodoListFragment extends Fragment {
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         inflater.inflate(R.menu.menu_main, menu);
     }
+    
 }

@@ -4,14 +4,15 @@ import androidx.paging.DataSource;
 import androidx.room.Dao;
 import androidx.room.Delete;
 import androidx.room.Insert;
+import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
 import androidx.room.Update;
 
 @Dao
 public interface TodoTaskDAO {
 
-    @Insert
-    void insert(TodoTask todoTask);
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    void insert(TodoTask... todoTask);
 
     @Delete
     void delete(TodoTask todoTask);
@@ -30,7 +31,6 @@ public interface TodoTaskDAO {
 
     @Query("SELECT * FROM TodoTask WHERE completed = :completed")
     DataSource.Factory<Integer, TodoTask> loadTodoTasksByCompletedStatus(int completed);
-
 
     @Query("SELECT * FROM TodoTask WHERE priority = :priority")
     DataSource.Factory<Integer, TodoTask> loadTodoTasksByPriority(int priority);

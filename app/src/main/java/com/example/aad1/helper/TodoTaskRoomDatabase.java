@@ -43,7 +43,7 @@ public abstract class TodoTaskRoomDatabase extends RoomDatabase {
                 @Override
                 public void onOpen(@NonNull SupportSQLiteDatabase db) {
                     super.onOpen(db);
-                    new PopulateDbAsync(INSTANCE).execute();
+//                    new PopulateDbAsync(INSTANCE).execute();
                 }
             };
 
@@ -70,7 +70,7 @@ public abstract class TodoTaskRoomDatabase extends RoomDatabase {
             // when it is first created
             mDao.deleteAll();
 
-            for (int time = 0; time < 50; time++) {
+            for (int time = 0; time < 2; time++) {
                 for (int i = 0; i <= todoTasks.length - 1; i++) {
                     try {
                         TodoTask newTodoTask = (TodoTask) todoTasks[i].clone();

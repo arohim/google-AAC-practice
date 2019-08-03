@@ -31,9 +31,9 @@
                 android:gravity="top"
                 android:hint="@string/description_hint" />
 
-            <DatePicker
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+            <!--            <DatePicker-->
+            <!--                android:layout_width="match_parent"-->
+            <!--                android:layout_height="wrap_content" />-->
 
         </LinearLayout>
     </ScrollView>

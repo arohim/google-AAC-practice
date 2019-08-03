@@ -1,6 +1,7 @@
 package com.example.aad1.repository;
 
 import android.content.Context;
+import android.os.AsyncTask;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.LiveData;
@@ -27,6 +28,25 @@ public class TodoTaskRepository {
                 .setBoundaryCallback(callback)
                 .build();
         return data;
+    }
+
+    public void insert(TodoTask todoTask) {
+        new InsertAsyncTask(todoTaskDAO).execute(todoTask);
+    }
+
+    public static class InsertAsyncTask extends AsyncTask<TodoTask, Void, Void> {
+
+        private TodoTaskDAO todoTaskDAO;
+
+        public InsertAsyncTask(TodoTaskDAO todoTaskDAO) {
+            this.todoTaskDAO = todoTaskDAO;
+        }
+
+        @Override
+        protected Void doInBackground(TodoTask... todoTasks) {
+            todoTaskDAO.insert(todoTasks);
+            return null;
+        }
     }
 
     private PagedList.BoundaryCallback callback = new PagedList.BoundaryCallback<TodoTask>() {
