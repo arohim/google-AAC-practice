@@ -23,16 +23,16 @@ public interface TodoTaskDAO {
     @Update
     void update(TodoTask... todoTask);
 
-    @Query("SELECT * FROM TodoTask")
+    @Query("SELECT * FROM TodoTask ORDER BY id DESC")
     DataSource.Factory<Integer, TodoTask> loadTodoTasks();
 
-    @Query("SELECT * FROM TodoTask limit :limit offset :offset")
+    @Query("SELECT * FROM TodoTask ORDER BY id limit :limit offset :offset")
     DataSource.Factory<Integer, TodoTask> loadTodoTasks(int offset, int limit);
 
-    @Query("SELECT * FROM TodoTask WHERE completed = :completed")
+    @Query("SELECT * FROM TodoTask WHERE completed = :completed ORDER BY id DESC")
     DataSource.Factory<Integer, TodoTask> loadTodoTasksByCompletedStatus(int completed);
 
-    @Query("SELECT * FROM TodoTask WHERE priority = :priority")
+    @Query("SELECT * FROM TodoTask WHERE priority = :priority ORDER BY id DESC")
     DataSource.Factory<Integer, TodoTask> loadTodoTasksByPriority(int priority);
 
 }
