@@ -5,22 +5,23 @@ import android.app.Application;
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
+import androidx.paging.PagedList;
 
 import com.example.aad1.repository.TodoTaskRepository;
 
-import java.util.List;
-
 public class TodoTaskViewModel extends AndroidViewModel {
 
-    private final LiveData<List<TodoTask>> todoTasks;
+    private TodoTaskRepository repository;
+
+    private LiveData<PagedList<TodoTask>> todoTasks;
 
     public TodoTaskViewModel(@NonNull Application application) {
         super(application);
-        TodoTaskRepository repository = new TodoTaskRepository(application);
+        repository = new TodoTaskRepository(application);
         todoTasks = repository.getTodoTasks();
     }
 
-    public LiveData<List<TodoTask>> getTodoTasks() {
+    public LiveData<PagedList<TodoTask>> getTodoTasks() {
         return todoTasks;
     }
 

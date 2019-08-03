@@ -17,6 +17,7 @@ import androidx.lifecycle.ViewModelProviders;
 import androidx.navigation.NavDirections;
 import androidx.navigation.Navigation;
 import androidx.navigation.fragment.NavHostFragment;
+import androidx.paging.PagedList;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -74,10 +75,10 @@ public class TodoListFragment extends Fragment {
 
         viewModel = ViewModelProviders.of(this).get(TodoTaskViewModel.class);
 
-        viewModel.getTodoTasks().observe(this, new Observer<List<TodoTask>>() {
+        viewModel.getTodoTasks().observe(this, new Observer<PagedList<TodoTask>>() {
             @Override
-            public void onChanged(List<TodoTask> todoTasks) {
-                todoListAdapter.setTodoTasks(todoTasks);
+            public void onChanged(PagedList<TodoTask> todoTasks) {
+                todoListAdapter.submitList(todoTasks);
             }
         });
 

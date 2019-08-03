@@ -1,13 +1,11 @@
 package com.example.aad1.model;
 
-import androidx.lifecycle.LiveData;
+import androidx.paging.DataSource;
 import androidx.room.Dao;
 import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.Query;
 import androidx.room.Update;
-
-import java.util.List;
 
 @Dao
 public interface TodoTaskDAO {
@@ -25,13 +23,16 @@ public interface TodoTaskDAO {
     void update(TodoTask... todoTask);
 
     @Query("SELECT * FROM TodoTask")
-    LiveData<List<TodoTask>> loadTodoTasks();
+    DataSource.Factory<Integer, TodoTask> loadTodoTasks();
+
+    @Query("SELECT * FROM TodoTask limit :limit offset :offset")
+    DataSource.Factory<Integer, TodoTask> loadTodoTasks(int offset, int limit);
 
     @Query("SELECT * FROM TodoTask WHERE completed = :completed")
-    LiveData<List<TodoTask>> loadTodoTasksByCompletedStatus(int completed);
+    DataSource.Factory<Integer, TodoTask> loadTodoTasksByCompletedStatus(int completed);
 
 
     @Query("SELECT * FROM TodoTask WHERE priority = :priority")
-    LiveData<List<TodoTask>> loadTodoTasksByPriority(int priority);
+    DataSource.Factory<Integer, TodoTask> loadTodoTasksByPriority(int priority);
 
 }

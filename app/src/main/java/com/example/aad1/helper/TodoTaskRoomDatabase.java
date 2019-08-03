@@ -70,8 +70,10 @@ public abstract class TodoTaskRoomDatabase extends RoomDatabase {
             // when it is first created
             mDao.deleteAll();
 
-            for (int i = 0; i <= todoTasks.length - 1; i++) {
-                mDao.insert(todoTasks[i]);
+            for (int time = 0; time < 50; time++) {
+                for (int i = 0; i <= todoTasks.length - 1; i++) {
+                    mDao.insert(todoTasks[i]);
+                }
             }
             return null;
         }
