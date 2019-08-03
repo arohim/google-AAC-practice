@@ -15,6 +15,7 @@ import androidx.navigation.fragment.NavHostFragment;
 
 import com.example.aad1.R;
 import com.example.aad1.databinding.FragmentAddOrEditBinding;
+import com.example.aad1.helper.Utils;
 import com.example.aad1.model.AddOrEditViewModel;
 import com.example.aad1.model.TodoTask;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -45,6 +46,7 @@ public class AddOrEditFragment extends Fragment {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Utils.hideKeyboard(getActivity());
                 insertToDB();
                 redirectToTodoList();
             }
@@ -55,6 +57,8 @@ public class AddOrEditFragment extends Fragment {
         String title = binding.addTaskTitle.getText().toString();
         String description = binding.addTaskDescription.getText().toString();
         TodoTask todoTask = new TodoTask(title, description, TodoTask.LOW_PRIORITY, TodoTask.NO_DUE_DATE, TASK_NOT_COMPLETED);
+        binding.addTaskTitle.clearFocus();
+        binding.addTaskDescription.clearFocus();
         viewModel.insert(todoTask);
     }
 
