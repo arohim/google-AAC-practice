@@ -10,7 +10,7 @@ import androidx.room.PrimaryKey;
 
 
 @Entity(tableName = "TodoTask")
-public class TodoTask implements Parcelable {
+public class TodoTask implements Parcelable, Cloneable {
 
     public final static int HIGH_PRIORITY = 0;
     public final static int MEDIUM_PRIORITY = 1;
@@ -140,4 +140,9 @@ public class TodoTask implements Parcelable {
             return new TodoTask[size];
         }
     };
+
+    @Override
+    public Object clone() throws CloneNotSupportedException {
+        return super.clone();
+    }
 }

@@ -53,10 +53,10 @@ public abstract class TodoTaskRoomDatabase extends RoomDatabase {
 
         TodoTask[] todoTasks = {
                 new TodoTask("name", "description", 1, NO_DUE_DATE, 0),
-                new TodoTask("name2", "description2", 2, 1564825993, 1),
-                new TodoTask("name3", "description3", 3, 1564825993, 0),
-                new TodoTask("name4", "description4", 1, NO_DUE_DATE, 0),
-                new TodoTask("name5", "description5", 2, 1577836800, 1),
+                new TodoTask("name", "description2", 2, 1564825993, 1),
+                new TodoTask("name", "description3", 3, 1564825993, 0),
+                new TodoTask("name", "description4", 1, NO_DUE_DATE, 0),
+                new TodoTask("name", "description5", 2, 1577836800, 1),
         };
 
         public PopulateDbAsync(TodoTaskRoomDatabase db) {
@@ -72,7 +72,14 @@ public abstract class TodoTaskRoomDatabase extends RoomDatabase {
 
             for (int time = 0; time < 50; time++) {
                 for (int i = 0; i <= todoTasks.length - 1; i++) {
-                    mDao.insert(todoTasks[i]);
+                    try {
+                        TodoTask newTodoTask = (TodoTask) todoTasks[i].clone();
+                        newTodoTask.setName(newTodoTask.getName() + time + i);
+                        mDao.insert(newTodoTask);
+                    } catch (CloneNotSupportedException e) {
+                        e.printStackTrace();
+                    }
+
                 }
             }
             return null;

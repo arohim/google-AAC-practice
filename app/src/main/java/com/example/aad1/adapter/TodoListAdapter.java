@@ -49,20 +49,24 @@ public class TodoListAdapter extends PagedListAdapter<TodoTask, TodoListAdapter.
     @Override
     public void onBindViewHolder(@NonNull TodoListAdapterViewHolder holder, int position) {
         TodoTask todoTask = getItem(position);
-        holder.cbTodoName.setText(todoTask.getId() + "");
-//        holder.cbTodoName.setChecked(todoTask.getCompleted() == 1);
-//        holder.ivTodoPriorityStar.setPriority(todoTask.getPriority());
-//
-//        String dueDateString;
-//        long dueDate = todoTask.getDueDate();
-//        Context context = holder.itemView.getContext();
-//        if (dueDate == TodoTask.NO_DUE_DATE) {
-//            dueDateString = context.getString(R.string.no_due_date);
-//        } else {
-//            dueDateString = TodoDateUtils.formatDueDate(context, dueDate);
-//        }
-//
-//        holder.tvTodoDueDate.setText(dueDateString);
+
+        if (todoTask == null)
+            return;
+
+        holder.cbTodoName.setText(todoTask.getName());
+        holder.cbTodoName.setChecked(todoTask.getCompleted() == 1);
+        holder.ivTodoPriorityStar.setPriority(todoTask.getPriority());
+
+        String dueDateString;
+        long dueDate = todoTask.getDueDate();
+        Context context = holder.itemView.getContext();
+        if (dueDate == TodoTask.NO_DUE_DATE) {
+            dueDateString = context.getString(R.string.no_due_date);
+        } else {
+            dueDateString = TodoDateUtils.formatDueDate(context, dueDate);
+        }
+
+        holder.tvTodoDueDate.setText(dueDateString);
     }
 
     public class TodoListAdapterViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
