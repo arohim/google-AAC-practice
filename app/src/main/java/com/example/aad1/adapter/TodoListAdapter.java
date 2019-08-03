@@ -1,5 +1,7 @@
 package com.example.aad1.adapter;
 
+import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.aad1.R;
 import com.example.aad1.customview.PriorityStarImageView;
 import com.example.aad1.model.TodoTask;
+import com.example.aad1.util.TodoDateUtils;
 
 import java.util.List;
 
@@ -31,7 +34,21 @@ public class TodoListAdapter extends RecyclerView.Adapter<TodoListAdapter.TodoLi
     @Override
     public void onBindViewHolder(@NonNull TodoListAdapterViewHolder holder, int position) {
         TodoTask todoTask = todoTasks.get(position);
-        holder.cbTodoDescription.setText(todoTask.getName());
+        holder.cbTodoName.setText(todoTask.getName());
+        holder.cbTodoName.setChecked(todoTask.getCompleted() == 1);
+        holder.ivTodoPriorityStar.setPriority(todoTask.getPriority());
+
+        String dueDateString;
+        long dueDate = todoTask.getDueDate();
+        Context context = holder.itemView.getContext();
+        if (dueDate == TodoTask.NO_DUE_DATE) {
+            dueDateString = context.getString(R.string.no_due_date);
+        } else {
+            dueDateString = TodoDateUtils.formatDueDate(context, dueDate);
+        }
+
+        holder.tvTodoDueDate.setText(dueDateString);
+
     }
 
     @Override
@@ -43,7 +60,7 @@ public class TodoListAdapter extends RecyclerView.Adapter<TodoListAdapter.TodoLi
 
 
     public class TodoListAdapterViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-        final AppCompatCheckBox cbTodoDescription;
+        final AppCompatCheckBox cbTodoName;
         final TextView tvTodoDueDate;
         final TextView tvTodoPriority;
         final PriorityStarImageView ivTodoPriorityStar;
@@ -51,13 +68,13 @@ public class TodoListAdapter extends RecyclerView.Adapter<TodoListAdapter.TodoLi
 
         public TodoListAdapterViewHolder(@NonNull View itemView) {
             super(itemView);
-            cbTodoDescription = itemView.findViewById(R.id.cb_todo_description);
+            cbTodoName = itemView.findViewById(R.id.cb_todo_name);
             tvTodoDueDate = itemView.findViewById(R.id.tv_todo_due_date);
             tvTodoPriority = itemView.findViewById(R.id.tv_todo_priority);
             ivTodoPriorityStar = itemView.findViewById(R.id.iv_todo_priority_star);
             clTodoListItem = (ConstraintLayout) itemView;
             itemView.setOnClickListener(this);
-            cbTodoDescription.setOnClickListener(this);
+            cbTodoName.setOnClickListener(this);
         }
 
         @Override

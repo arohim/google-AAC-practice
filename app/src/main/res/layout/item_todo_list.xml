@@ -8,7 +8,7 @@
     android:padding="16dp">
 
     <androidx.appcompat.widget.AppCompatCheckBox
-        android:id="@+id/cb_todo_description"
+        android:id="@+id/cb_todo_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ellipsize="end"
@@ -36,7 +36,7 @@
         android:layout_marginStart="32dp"
         android:layout_marginTop="4dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cb_todo_description"
+        app:layout_constraintTop_toBottomOf="@+id/cb_todo_name"
         tools:text="@string/no_due_date" />
 
     <com.example.aad1.customview.PriorityStarImageView
