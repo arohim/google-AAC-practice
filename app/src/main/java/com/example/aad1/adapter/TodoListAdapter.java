@@ -12,8 +12,13 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.aad1.R;
 import com.example.aad1.customview.PriorityStarImageView;
+import com.example.aad1.model.TodoTask;
+
+import java.util.List;
 
 public class TodoListAdapter extends RecyclerView.Adapter<TodoListAdapter.TodoListAdapterViewHolder> {
+
+    private List<TodoTask> todoTasks;
 
     @NonNull
     @Override
@@ -25,13 +30,17 @@ public class TodoListAdapter extends RecyclerView.Adapter<TodoListAdapter.TodoLi
 
     @Override
     public void onBindViewHolder(@NonNull TodoListAdapterViewHolder holder, int position) {
-        holder.cbTodoDescription.setText("xxx xxxx xxxx xxx");
+        TodoTask todoTask = todoTasks.get(position);
+        holder.cbTodoDescription.setText(todoTask.getName());
     }
 
     @Override
     public int getItemCount() {
-        return 100;
+        if (todoTasks != null)
+            return todoTasks.size();
+        else return 0;
     }
+
 
     public class TodoListAdapterViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         final AppCompatCheckBox cbTodoDescription;
@@ -55,5 +64,10 @@ public class TodoListAdapter extends RecyclerView.Adapter<TodoListAdapter.TodoLi
         public void onClick(View v) {
 
         }
+    }
+
+    public void setTodoTasks(List<TodoTask> todoTasks) {
+        this.todoTasks = todoTasks;
+        notifyDataSetChanged();
     }
 }

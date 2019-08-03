@@ -24,7 +24,7 @@ public abstract class TodoTaskRoomDatabase extends RoomDatabase {
             synchronized (TodoTaskRoomDatabase.class) {
                 if (INSTANCE == null) {
                     INSTANCE = Room.databaseBuilder(context.getApplicationContext(),
-                            TodoTaskRoomDatabase.class, "word_database")
+                            TodoTaskRoomDatabase.class, "todo_task_database")
                             .fallbackToDestructiveMigration()
                             .addCallback(sRoomDatabaseCallback)
                             .build();

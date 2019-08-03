@@ -11,6 +11,9 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
+import androidx.lifecycle.ViewModelProviders;
 import androidx.navigation.NavDirections;
 import androidx.navigation.Navigation;
 import androidx.navigation.fragment.NavHostFragment;
@@ -21,7 +24,11 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.aad1.R;
 import com.example.aad1.adapter.TodoListAdapter;
 import com.example.aad1.databinding.FragmentTodoListBinding;
+import com.example.aad1.model.TodoTask;
+import com.example.aad1.model.TodoTaskViewModel;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
+import java.util.List;
 
 public class TodoListFragment extends Fragment {
 
@@ -30,6 +37,8 @@ public class TodoListFragment extends Fragment {
     RecyclerView recyclerView;
 
     TodoListAdapter todoListAdapter;
+
+    private TodoTaskViewModel viewModel;
 
     public TodoListFragment() {
         // Required empty public constructor
@@ -62,6 +71,15 @@ public class TodoListFragment extends Fragment {
         recyclerView.setAdapter(todoListAdapter);
         DividerItemDecoration decorator = new DividerItemDecoration(getActivity(), DividerItemDecoration.VERTICAL);
         recyclerView.addItemDecoration(decorator);
+
+        viewModel = ViewModelProviders.of(this).get(TodoTaskViewModel.class);
+
+        viewModel.getTodoTasks().observe(this, new Observer<List<TodoTask>>() {
+            @Override
+            public void onChanged(List<TodoTask> todoTasks) {
+                todoListAdapter.setTodoTasks(todoTasks);
+            }
+        });
 
         FloatingActionButton fab = getActivity().findViewById(R.id.fab);
         fab.setImageResource(R.drawable.ic_add_black_24dp);

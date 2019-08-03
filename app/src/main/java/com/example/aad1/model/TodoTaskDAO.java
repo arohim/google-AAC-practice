@@ -7,6 +7,8 @@ import androidx.room.Insert;
 import androidx.room.Query;
 import androidx.room.Update;
 
+import java.util.List;
+
 @Dao
 public interface TodoTaskDAO {
 
@@ -23,13 +25,13 @@ public interface TodoTaskDAO {
     void update(TodoTask... todoTask);
 
     @Query("SELECT * FROM TodoTask")
-    LiveData<TodoTask> loadTodoTasks();
+    LiveData<List<TodoTask>> loadTodoTasks();
 
     @Query("SELECT * FROM TodoTask WHERE completed = :completed")
-    LiveData<TodoTask> loadTodoTasksByCompletedStatus(int completed);
+    LiveData<List<TodoTask>> loadTodoTasksByCompletedStatus(int completed);
 
 
     @Query("SELECT * FROM TodoTask WHERE priority = :priority")
-    LiveData<TodoTask> loadTodoTasksByPriority(int priority);
+    LiveData<List<TodoTask>> loadTodoTasksByPriority(int priority);
 
 }

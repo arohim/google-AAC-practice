@@ -8,9 +8,11 @@ import com.example.aad1.helper.TodoTaskRoomDatabase;
 import com.example.aad1.model.TodoTask;
 import com.example.aad1.model.TodoTaskDAO;
 
+import java.util.List;
+
 public class TodoTaskRepository {
 
-    private final LiveData<TodoTask> todoTasks;
+    private final LiveData<List<TodoTask>> todoTasks;
 
     public TodoTaskRepository(Context context) {
         TodoTaskRoomDatabase database = TodoTaskRoomDatabase.getDatabase(context);
@@ -18,7 +20,7 @@ public class TodoTaskRepository {
         todoTasks = dao.loadTodoTasks();
     }
 
-    public LiveData<TodoTask> getTodoTasks() {
+    public LiveData<List<TodoTask>> getTodoTasks() {
         return todoTasks;
     }
 
