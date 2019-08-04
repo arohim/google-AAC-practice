@@ -1,5 +1,6 @@
 package com.example.aad1.fragment;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -14,9 +15,12 @@ import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
+import androidx.loader.app.LoaderManager;
+import androidx.loader.content.Loader;
 import androidx.navigation.NavDirections;
 import androidx.navigation.fragment.NavHostFragment;
 import androidx.paging.PagedList;
+import androidx.preference.PreferenceManager;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -28,7 +32,7 @@ import com.example.aad1.model.TodoTask;
 import com.example.aad1.model.TodoTaskViewModel;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
-public class TodoListFragment extends Fragment {
+public class TodoListFragment extends Fragment implements SharedPreferences.OnSharedPreferenceChangeListener, LoaderManager.LoaderCallbacks<Object> {
 
     FragmentTodoListBinding binding;
 
@@ -37,6 +41,10 @@ public class TodoListFragment extends Fragment {
     TodoListAdapter todoListAdapter;
 
     private TodoTaskViewModel viewModel;
+
+    private SharedPreferences mSharedPreferences;
+
+    private static final int ID_TODO_LIST_LOADER = 2019;
 
     public TodoListFragment() {
         // Required empty public constructor
@@ -72,12 +80,13 @@ public class TodoListFragment extends Fragment {
 
         viewModel = ViewModelProviders.of(this).get(TodoTaskViewModel.class);
 
-        viewModel.getTodoTasks().observe(this, new Observer<PagedList<TodoTask>>() {
+        Observer<PagedList<TodoTask>> observer = new Observer<PagedList<TodoTask>>() {
             @Override
             public void onChanged(PagedList<TodoTask> todoTasks) {
                 todoListAdapter.submitList(todoTasks);
             }
-        });
+        };
+        viewModel.getTodoTasks().observe(this, observer);
 
         FloatingActionButton fab = getActivity().findViewById(R.id.fab);
         fab.setImageResource(R.drawable.ic_add_black_24dp);
@@ -89,6 +98,9 @@ public class TodoListFragment extends Fragment {
             }
         });
 
+//        mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
+//        mSharedPreferences.registerOnSharedPreferenceChangeListener(this);
+//        LoaderManager.getInstance(getActivity()).initLoader(ID_TODO_LIST_LOADER, null, this);
     }
 
     @Override
@@ -103,5 +115,24 @@ public class TodoListFragment extends Fragment {
             return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
+
+    }
+
+    @NonNull
+    @Override
+    public Loader<Object> onCreateLoader(int id, @Nullable Bundle args) {
+        return null;
+    }
+
+    @Override
+    public void onLoadFinished(@NonNull Loader<Object> loader, Object data) {
+    }
+
+    @Override
+    public void onLoaderReset(@NonNull Loader<Object> loader) {
     }
 }

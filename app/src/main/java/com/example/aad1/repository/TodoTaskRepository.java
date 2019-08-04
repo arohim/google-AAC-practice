@@ -23,8 +23,8 @@ public class TodoTaskRepository {
         todoTaskDAO = database.todoTaskDAO();
     }
 
-    public LiveData<PagedList<TodoTask>> getTodoTasks() {
-        LiveData<PagedList<TodoTask>> data = new LivePagedListBuilder(todoTaskDAO.loadTodoTasks(), DATABASE_PAGE_SIZE)
+    public LiveData<PagedList<TodoTask>> getTodoTasks(String sortingBy) {
+        LiveData<PagedList<TodoTask>> data = new LivePagedListBuilder(todoTaskDAO.loadTodoTasks(sortingBy), DATABASE_PAGE_SIZE)
                 .setBoundaryCallback(callback)
                 .build();
         return data;

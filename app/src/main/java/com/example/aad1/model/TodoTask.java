@@ -18,6 +18,8 @@ public class TodoTask implements Parcelable, Cloneable {
     public final static int TASK_COMPLETED = 1;
     public final static int TASK_NOT_COMPLETED = 0;
     public final static long NO_DUE_DATE = Long.MAX_VALUE;
+    public final static String SORTED_BY_PRIORITY = "completed, priority DESC, dueDate DESC";
+    public final static String SORTED_BY_DUE_DATE = "completed, dueDate DESC, priority DESC";
 
     @PrimaryKey(autoGenerate = true)
     @NonNull

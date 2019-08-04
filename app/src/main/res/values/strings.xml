@@ -24,4 +24,7 @@
 
     <!-- Sorting -->
     <string name="sorting_title">Sorted by</string>
+
+    <!--  Preference key-->
+    <string name="sorting">pref_key_sorting</string>
 </resources>

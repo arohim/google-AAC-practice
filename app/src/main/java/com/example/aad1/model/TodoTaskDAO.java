@@ -26,6 +26,9 @@ public interface TodoTaskDAO {
     @Query("SELECT * FROM TodoTask ORDER BY id DESC")
     DataSource.Factory<Integer, TodoTask> loadTodoTasks();
 
+    @Query("SELECT * FROM TodoTask ORDER BY :sortingBy")
+    DataSource.Factory<Integer, TodoTask> loadTodoTasks(String sortingBy);
+
     @Query("SELECT * FROM TodoTask ORDER BY id limit :limit offset :offset")
     DataSource.Factory<Integer, TodoTask> loadTodoTasks(int offset, int limit);
 
