@@ -61,8 +61,8 @@ public class TodoTaskViewModel extends AndroidViewModel {
         return todoTasks;
     }
 
-    public void configurationChanged(String sortBy) {
-        sortedBy.postValue(sortBy);
+    public void configurationChanged() {
+        sortedBy.postValue("");
     }
 
     private String getSorting(Context context) {

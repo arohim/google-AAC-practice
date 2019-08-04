@@ -117,7 +117,7 @@ public class TodoListFragment extends Fragment implements SharedPreferences.OnSh
 
     @Override
     public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
-
+        viewModel.configurationChanged();
     }
 
     @NonNull
