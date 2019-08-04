@@ -32,6 +32,8 @@ import com.example.aad1.model.TodoTask;
 import com.example.aad1.model.TodoTaskViewModel;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
+import static com.example.aad1.model.TodoTask.SORTED_BY_PRIORITY;
+
 public class TodoListFragment extends Fragment implements SharedPreferences.OnSharedPreferenceChangeListener, LoaderManager.LoaderCallbacks<Object> {
 
     FragmentTodoListBinding binding;
@@ -80,6 +82,10 @@ public class TodoListFragment extends Fragment implements SharedPreferences.OnSh
 
         viewModel = ViewModelProviders.of(this).get(TodoTaskViewModel.class);
 
+        mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
+        String sorting = mSharedPreferences.getString(getActivity().getString(R.string.sorting), SORTED_BY_PRIORITY);
+        viewModel.configurationChanged(sorting);
+
         Observer<PagedList<TodoTask>> observer = new Observer<PagedList<TodoTask>>() {
             @Override
             public void onChanged(PagedList<TodoTask> todoTasks) {
@@ -97,10 +103,6 @@ public class TodoListFragment extends Fragment implements SharedPreferences.OnSh
                 NavHostFragment.findNavController(TodoListFragment.this).navigate(action);
             }
         });
-
-//        mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
-//        mSharedPreferences.registerOnSharedPreferenceChangeListener(this);
-//        LoaderManager.getInstance(getActivity()).initLoader(ID_TODO_LIST_LOADER, null, this);
     }
 
     @Override
