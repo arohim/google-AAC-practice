@@ -17,4 +17,11 @@
     <string name="add_or_edit">Add or Edit</string>
     <string name="title_hint">Title</string>
     <string name="description_hint">Enter your TO-DO here.</string>
+    <string name="title_activity_settings">Settings</string>
+
+    <!-- Preference Titles -->
+    <string name="setting_header">Settings</string>
+
+    <!-- Sorting -->
+    <string name="sorting_title">Sorted by</string>
 </resources>

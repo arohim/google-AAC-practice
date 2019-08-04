@@ -35,4 +35,10 @@
             android:id="@+id/next_action"
             app:popUpTo="@id/todo_list" />
     </fragment>
+
+    <fragment
+        android:id="@+id/settings"
+        android:name="com.example.aad1.activity.SettingsFragment"
+        android:label="@string/setting_header" />
+
 </navigation>
