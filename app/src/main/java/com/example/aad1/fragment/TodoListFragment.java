@@ -82,10 +82,6 @@ public class TodoListFragment extends Fragment implements SharedPreferences.OnSh
 
         viewModel = ViewModelProviders.of(this).get(TodoTaskViewModel.class);
 
-        mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
-        String sorting = mSharedPreferences.getString(getActivity().getString(R.string.sorting), SORTED_BY_PRIORITY);
-        viewModel.configurationChanged(sorting);
-
         Observer<PagedList<TodoTask>> observer = new Observer<PagedList<TodoTask>>() {
             @Override
             public void onChanged(PagedList<TodoTask> todoTasks) {

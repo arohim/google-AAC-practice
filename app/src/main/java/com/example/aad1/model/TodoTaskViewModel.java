@@ -33,7 +33,11 @@ public class TodoTaskViewModel extends AndroidViewModel {
         @Override
         public LiveData<PagedList<TodoTask>> apply(String input) {
             String sorting = getSorting(context);
-            return repository.getTodoTasks(sorting);
+            if (sorting.equals(SORTED_BY_PRIORITY)) {
+                return repository.loadTodoTasksOrderByPriority();
+            } else {
+                return repository.loadTodoTasksOrderByDueDate();
+            }
         }
     });
 
@@ -49,8 +53,8 @@ public class TodoTaskViewModel extends AndroidViewModel {
         context = application;
         sharedPreference = PreferenceManager.getDefaultSharedPreferences(application);
         repository = new TodoTaskRepository(application);
-        String sorting = sharedPreference.getString(context.getString(R.string.sorting), SORTED_BY_PRIORITY);
-        configurationChanged(sorting);
+        String sortBy = sharedPreference.getString(context.getString(R.string.sorting), SORTED_BY_PRIORITY);
+        sortedBy.postValue(sortBy);
     }
 
     public LiveData<PagedList<TodoTask>> getTodoTasks() {
