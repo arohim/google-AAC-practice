@@ -1,5 +1,6 @@
 package com.example.aad1.model;
 
+import androidx.lifecycle.LiveData;
 import androidx.paging.DataSource;
 import androidx.room.Dao;
 import androidx.room.Delete;
@@ -22,6 +23,9 @@ public interface TodoTaskDAO {
 
     @Update
     void update(TodoTask... todoTask);
+
+    @Query("SELECT * FROM TodoTask WHERE id = :id")
+    LiveData<TodoTask> loadTodoTaskById(int id);
 
     @Query("SELECT * FROM TodoTask ORDER BY id DESC")
     DataSource.Factory<Integer, TodoTask> loadTodoTasks();

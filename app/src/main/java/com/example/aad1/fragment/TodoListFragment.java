@@ -20,7 +20,6 @@ import androidx.loader.content.Loader;
 import androidx.navigation.NavDirections;
 import androidx.navigation.fragment.NavHostFragment;
 import androidx.paging.PagedList;
-import androidx.preference.PreferenceManager;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -31,8 +30,6 @@ import com.example.aad1.databinding.FragmentTodoListBinding;
 import com.example.aad1.model.TodoTask;
 import com.example.aad1.model.TodoTaskViewModel;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-
-import static com.example.aad1.model.TodoTask.SORTED_BY_PRIORITY;
 
 public class TodoListFragment extends Fragment implements SharedPreferences.OnSharedPreferenceChangeListener, LoaderManager.LoaderCallbacks<Object> {
 
@@ -71,17 +68,25 @@ public class TodoListFragment extends Fragment implements SharedPreferences.OnSh
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        setUpAdapter();
+        setUpViewModel();
+        setUpFloatingAction();
+    }
 
-        recyclerView = binding.rvTodoList;
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity(), RecyclerView.VERTICAL, false);
-        recyclerView.setLayoutManager(linearLayoutManager);
-        todoListAdapter = new TodoListAdapter();
-        recyclerView.setAdapter(todoListAdapter);
-        DividerItemDecoration decorator = new DividerItemDecoration(getActivity(), DividerItemDecoration.VERTICAL);
-        recyclerView.addItemDecoration(decorator);
+    private void setUpFloatingAction() {
+        FloatingActionButton fab = getActivity().findViewById(R.id.fab);
+        fab.setImageResource(R.drawable.ic_add_black_24dp);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                NavDirections action = TodoListFragmentDirections.Companion.nextAction(0);
+                NavHostFragment.findNavController(TodoListFragment.this).navigate(action);
+            }
+        });
+    }
 
+    private void setUpViewModel() {
         viewModel = ViewModelProviders.of(this).get(TodoTaskViewModel.class);
-
         Observer<PagedList<TodoTask>> observer = new Observer<PagedList<TodoTask>>() {
             @Override
             public void onChanged(PagedList<TodoTask> todoTasks) {
@@ -89,16 +94,22 @@ public class TodoListFragment extends Fragment implements SharedPreferences.OnSh
             }
         };
         viewModel.getTodoTasks().observe(this, observer);
+    }
 
-        FloatingActionButton fab = getActivity().findViewById(R.id.fab);
-        fab.setImageResource(R.drawable.ic_add_black_24dp);
-        fab.setOnClickListener(new View.OnClickListener() {
+    private void setUpAdapter() {
+        recyclerView = binding.rvTodoList;
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity(), RecyclerView.VERTICAL, false);
+        recyclerView.setLayoutManager(linearLayoutManager);
+        todoListAdapter = new TodoListAdapter(new TodoListAdapter.TodoListAdapterOnClickHandler() {
             @Override
-            public void onClick(View v) {
-                NavDirections action = TodoListFragmentDirections.Companion.nextAction(1);
+            public void onClick(TodoTask todoTask, View view) {
+                NavDirections action = TodoListFragmentDirections.Companion.nextAction(todoTask.getId());
                 NavHostFragment.findNavController(TodoListFragment.this).navigate(action);
             }
         });
+        recyclerView.setAdapter(todoListAdapter);
+        DividerItemDecoration decorator = new DividerItemDecoration(getActivity(), DividerItemDecoration.VERTICAL);
+        recyclerView.addItemDecoration(decorator);
     }
 
     @Override

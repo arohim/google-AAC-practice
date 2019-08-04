@@ -4,12 +4,15 @@ import android.app.Application;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
+import androidx.lifecycle.LiveData;
 
 import com.example.aad1.repository.TodoTaskRepository;
 
 public class AddOrEditViewModel extends AndroidViewModel {
 
     private final TodoTaskRepository repository;
+
+    public LiveData<TodoTask> todoTask;
 
     public AddOrEditViewModel(@NonNull Application application) {
         super(application);
@@ -20,4 +23,11 @@ public class AddOrEditViewModel extends AndroidViewModel {
         repository.insert(todoTask);
     }
 
+    public LiveData<TodoTask> getTodoTask(int id) {
+        return repository.loadTodoTaskById(id);
+    }
+
+    public void update(TodoTask todoTask) {
+        repository.update(todoTask);
+    }
 }

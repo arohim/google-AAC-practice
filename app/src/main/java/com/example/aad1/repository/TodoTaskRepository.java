@@ -30,7 +30,6 @@ public class TodoTaskRepository {
         return data;
     }
 
-
     public LiveData<PagedList<TodoTask>> loadTodoTasksOrderByDueDate() {
         LiveData<PagedList<TodoTask>> data = new LivePagedListBuilder(todoTaskDAO.loadTodoTasksOrderByDueDate(), DATABASE_PAGE_SIZE)
                 .setBoundaryCallback(callback)
@@ -38,21 +37,44 @@ public class TodoTaskRepository {
         return data;
     }
 
+    public LiveData<TodoTask> loadTodoTaskById(int id) {
+        return todoTaskDAO.loadTodoTaskById(id);
+    }
+
     public void insert(TodoTask todoTask) {
         new InsertAsyncTask(todoTaskDAO).execute(todoTask);
+    }
+
+    public void update(TodoTask todoTask) {
+        new UpdateAsyncTask(todoTaskDAO).execute(todoTask);
     }
 
     public static class InsertAsyncTask extends AsyncTask<TodoTask, Void, Void> {
 
         private TodoTaskDAO todoTaskDAO;
 
-        public InsertAsyncTask(TodoTaskDAO todoTaskDAO) {
+        InsertAsyncTask(TodoTaskDAO todoTaskDAO) {
             this.todoTaskDAO = todoTaskDAO;
         }
 
         @Override
         protected Void doInBackground(TodoTask... todoTasks) {
             todoTaskDAO.insert(todoTasks);
+            return null;
+        }
+    }
+
+    public static class UpdateAsyncTask extends AsyncTask<TodoTask, Void, Void> {
+
+        private TodoTaskDAO todoTaskDAO;
+
+        UpdateAsyncTask(TodoTaskDAO todoTaskDAO) {
+            this.todoTaskDAO = todoTaskDAO;
+        }
+
+        @Override
+        protected Void doInBackground(TodoTask... todoTasks) {
+            todoTaskDAO.update(todoTasks);
             return null;
         }
     }

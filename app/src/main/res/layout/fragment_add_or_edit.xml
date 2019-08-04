@@ -3,6 +3,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <data>
+
+        <variable
+            name="viewmodel"
+            type="com.example.aad1.model.TodoTask" />
+    </data>
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -22,6 +29,7 @@
                 android:layout_height="wrap_content"
                 android:hint="@string/title_hint"
                 android:maxLines="1"
+                android:text="@{viewmodel.name}"
                 android:textAppearance="@style/TextAppearance.AppCompat.Title" />
 
             <EditText
@@ -30,6 +38,7 @@
                 android:layout_height="350dp"
                 android:layout_below="@+id/add_task_title"
                 android:gravity="top"
+                android:text="@{viewmodel.description}"
                 android:hint="@string/description_hint" />
 
             <Button

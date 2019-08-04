@@ -17,6 +17,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.navigation.NavDirections;
 import androidx.navigation.fragment.NavHostFragment;
@@ -47,6 +48,10 @@ public class AddOrEditFragment extends Fragment {
 
     private long dueDate;
 
+    private boolean isEditing = false;
+
+    private TodoTask currentTodoTask;
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
@@ -60,13 +65,28 @@ public class AddOrEditFragment extends Fragment {
         super.onActivityCreated(savedInstanceState);
         viewModel = ViewModelProviders.of(this).get(AddOrEditViewModel.class);
 
+        int id = AddOrEditFragmentArgs.fromBundle(getArguments()).getId();
+        if (id != 0) {
+            isEditing = true;
+            viewModel.getTodoTask(id).observe(this, new Observer<TodoTask>() {
+                @Override
+                public void onChanged(TodoTask todoTask) {
+                    currentTodoTask = todoTask;
+                    bindViewModel(todoTask);
+                }
+            });
+        }
+
         FloatingActionButton fab = getActivity().findViewById(R.id.fab);
         fab.setImageResource(R.drawable.ic_done_black_24dp);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Utils.hideKeyboard(getActivity());
-                insertToDB();
+                if (!isEditing)
+                    insertToDB();
+                else
+                    updateToDB(currentTodoTask);
                 redirectToTodoList();
             }
         });
@@ -86,6 +106,27 @@ public class AddOrEditFragment extends Fragment {
             }
         });
 
+    }
+
+    private void updateToDB(TodoTask currentTodoTask) {
+        if (currentTodoTask != null) {
+            String title = binding.addTaskTitle.getText().toString();
+            String description = binding.addTaskDescription.getText().toString();
+            currentTodoTask.setName(title);
+            currentTodoTask.setDescription(description);
+            currentTodoTask.setPriority(priority);
+            currentTodoTask.setDueDate(dueDate);
+            viewModel.update(currentTodoTask);
+        }
+    }
+
+    private void bindViewModel(TodoTask todoTask) {
+        binding.setViewmodel(todoTask);
+        binding.btnPriority.setSelected(true);
+        binding.btnDueDate.setSelected(true);
+        final String[] priorities = getResources().getStringArray(R.array.priority_entries);
+        binding.btnPriority.setText(priorities[todoTask.getPriority()]);
+        binding.btnDueDate.setText(TodoDateUtils.formatDueDate(getContext(), todoTask.getDueDate()));
     }
 
     public void showDueDateDialog() {

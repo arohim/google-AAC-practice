@@ -20,7 +20,9 @@ import com.example.aad1.util.TodoDateUtils;
 
 public class TodoListAdapter extends PagedListAdapter<TodoTask, TodoListAdapter.TodoListAdapterViewHolder> {
 
-    public static DiffUtil.ItemCallback<TodoTask> ItemDifferent = new DiffUtil.ItemCallback<TodoTask>() {
+    private final TodoListAdapterOnClickHandler clickHandler;
+
+    private static DiffUtil.ItemCallback<TodoTask> ItemDifferent = new DiffUtil.ItemCallback<TodoTask>() {
 
         @Override
         public boolean areItemsTheSame(@NonNull TodoTask oldItem, @NonNull TodoTask newItem) {
@@ -34,8 +36,9 @@ public class TodoListAdapter extends PagedListAdapter<TodoTask, TodoListAdapter.
 
     };
 
-    public TodoListAdapter() {
+    public TodoListAdapter(TodoListAdapterOnClickHandler clickHandler) {
         super(ItemDifferent);
+        this.clickHandler = clickHandler;
     }
 
     @NonNull
@@ -53,6 +56,7 @@ public class TodoListAdapter extends PagedListAdapter<TodoTask, TodoListAdapter.
         if (todoTask == null)
             return;
 
+        holder.todoTask = todoTask;
         holder.cbTodoName.setText(todoTask.getName());
         holder.cbTodoName.setChecked(todoTask.getCompleted() == 1);
         holder.ivTodoPriorityStar.setPriority(todoTask.getPriority());
@@ -69,14 +73,19 @@ public class TodoListAdapter extends PagedListAdapter<TodoTask, TodoListAdapter.
         holder.tvTodoDueDate.setText(dueDateString);
     }
 
+    public interface TodoListAdapterOnClickHandler {
+        void onClick(TodoTask todoTask, View view);
+    }
+
     public class TodoListAdapterViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+        TodoTask todoTask;
         final AppCompatCheckBox cbTodoName;
         final TextView tvTodoDueDate;
         final TextView tvTodoPriority;
         final PriorityStarImageView ivTodoPriorityStar;
         final ConstraintLayout clTodoListItem;
 
-        public TodoListAdapterViewHolder(@NonNull View itemView) {
+        TodoListAdapterViewHolder(@NonNull View itemView) {
             super(itemView);
             cbTodoName = itemView.findViewById(R.id.cb_todo_name);
             tvTodoDueDate = itemView.findViewById(R.id.tv_todo_due_date);
@@ -89,7 +98,7 @@ public class TodoListAdapter extends PagedListAdapter<TodoTask, TodoListAdapter.
 
         @Override
         public void onClick(View v) {
-
+            clickHandler.onClick(todoTask, v);
         }
     }
 
