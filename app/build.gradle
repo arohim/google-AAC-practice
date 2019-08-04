@@ -36,6 +36,7 @@ dependencies {
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     implementation 'androidx.navigation:navigation-fragment:2.0.0'
     implementation 'androidx.navigation:navigation-ui:2.0.0'
+    implementation 'net.danlew:android.joda:2.9.9.3'
 
     implementation "androidx.paging:paging-runtime:$pagingVersion"
 

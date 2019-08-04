@@ -38,6 +38,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/add_task_description"
+                android:padding="8dp"
                 android:text="@string/low" />
 
             <Button
@@ -48,6 +49,7 @@
                 android:layout_below="@+id/add_task_description"
                 android:layout_marginStart="16dp"
                 android:layout_toEndOf="@+id/btn_priority"
+                android:padding="8dp"
                 android:text="@string/no_due_date" />
 
         </RelativeLayout>
