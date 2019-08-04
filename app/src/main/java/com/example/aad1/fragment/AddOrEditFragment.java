@@ -103,28 +103,31 @@ public class AddOrEditFragment extends Fragment {
         final int mHour = c.get(Calendar.HOUR_OF_DAY);
         final int mMinute = c.get(Calendar.MINUTE);
 
-        DatePickerDialog datePickerDialog = new DatePickerDialog(getActivity(),
+        DatePickerDialog datePickerDialog = new DatePickerDialog(
+                getActivity(),
                 new DatePickerDialog.OnDateSetListener() {
 
                     @Override
                     public void onDateSet(DatePicker view, final int year, final int monthOfYear, final int dayOfMonth) {
 
-                        // Launch Time Picker Dialog
-                        TimePickerDialog timePickerDialog = new TimePickerDialog(getActivity(), new TimePickerDialog.OnTimeSetListener() {
+                        TimePickerDialog timePickerDialog = new TimePickerDialog(
+                                getActivity(),
+                                new TimePickerDialog.OnTimeSetListener() {
 
-                            @Override
-                            public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-                                // 2018-06-10T08:25:05.964047+07:00
-                                String dateTimeStr = makeDateTimeString(hourOfDay, minute, year, monthOfYear, dayOfMonth);
-                                DateTime dateTime = DateTime.parse(dateTimeStr);
-                                dueDate = new Timestamp(dateTime.getMillis()).getTime();
-                                binding.btnDueDate.setText(TodoDateUtils.formatDueDate(getActivity(), dueDate));
-                                binding.btnDueDate.setSelected(true);
-                            }
-                        }, mHour, mMinute, false);
+                                    @Override
+                                    public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+                                        // 2018-06-10T08:25:05.964047+07:00
+                                        String dateTimeStr = makeDateTimeString(hourOfDay, minute, year, monthOfYear, dayOfMonth);
+                                        DateTime dateTime = DateTime.parse(dateTimeStr);
+                                        dueDate = new Timestamp(dateTime.getMillis()).getTime();
+                                        binding.btnDueDate.setText(TodoDateUtils.formatDueDate(getActivity(), dueDate));
+                                        binding.btnDueDate.setSelected(true);
+                                    }
+                                }, mHour, mMinute, false);
                         timePickerDialog.show();
                     }
                 }, mYear, mMonth, mDay);
+        datePickerDialog.getDatePicker().setMinDate(c.getTimeInMillis());
         datePickerDialog.show();
     }
 
