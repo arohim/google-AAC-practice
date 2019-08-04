@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:drawable="@drawable/outline_selected_tag" android:state_selected="true" />
+
+    <item android:drawable="@drawable/outline_pressed_tag" android:state_pressed="true" />
+
+    <item android:drawable="@drawable/outline_active_tag" android:state_selected="false" />
+
+</selector>
