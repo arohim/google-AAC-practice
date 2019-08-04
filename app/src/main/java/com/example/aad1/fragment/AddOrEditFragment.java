@@ -1,9 +1,12 @@
 package com.example.aad1.fragment;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -28,6 +31,8 @@ public class AddOrEditFragment extends Fragment {
 
     private FragmentAddOrEditBinding binding;
 
+    private int priority = 0;
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
@@ -51,12 +56,49 @@ public class AddOrEditFragment extends Fragment {
                 redirectToTodoList();
             }
         });
+
+        binding.btnPriority.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                displayPriorityDialog();
+            }
+        });
+
+
+        binding.btnDueDate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+            }
+        });
+
+    }
+
+    private void displayPriorityDialog() {
+        final String[] priorities = getResources().getStringArray(R.array.priority_entries);
+        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_list_item_1, priorities);
+        new AlertDialog.Builder(getActivity())
+                .setCancelable(true)
+                .setTitle(getResources().getString(R.string.priority))
+                .setAdapter(arrayAdapter, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        priority = which;
+                        String priorityString = priorities[which];
+                        binding.btnPriority.setText(priorityString);
+                        binding.btnPriority.setSelected(true);
+                    }
+                }).create().show();
     }
 
     private void insertToDB() {
         String title = binding.addTaskTitle.getText().toString();
         String description = binding.addTaskDescription.getText().toString();
-        TodoTask todoTask = new TodoTask(title, description, TodoTask.LOW_PRIORITY, TodoTask.NO_DUE_DATE, TASK_NOT_COMPLETED);
+        TodoTask todoTask = new TodoTask(
+                title,
+                description,
+                priority,
+                TodoTask.NO_DUE_DATE,
+                TASK_NOT_COMPLETED);
         binding.addTaskTitle.clearFocus();
         binding.addTaskDescription.clearFocus();
         viewModel.insert(todoTask);

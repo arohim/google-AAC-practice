@@ -12,9 +12,9 @@ import androidx.room.PrimaryKey;
 @Entity(tableName = "TodoTask")
 public class TodoTask implements Parcelable, Cloneable {
 
-    public final static int HIGH_PRIORITY = 0;
+    public final static int HIGH_PRIORITY = 2;
     public final static int MEDIUM_PRIORITY = 1;
-    public final static int LOW_PRIORITY = 2;
+    public final static int LOW_PRIORITY = 0;
     public final static int TASK_COMPLETED = 1;
     public final static int TASK_NOT_COMPLETED = 0;
     public final static long NO_DUE_DATE = Long.MAX_VALUE;
