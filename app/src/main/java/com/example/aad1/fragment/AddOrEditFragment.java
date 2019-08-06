@@ -78,7 +78,8 @@ public class AddOrEditFragment extends Fragment {
         }
 
         FloatingActionButton fab = getActivity().findViewById(R.id.fab);
-        fab.show();
+        if (!fab.isShown())
+            fab.show();
         fab.setImageResource(R.drawable.ic_done_black_24dp);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
