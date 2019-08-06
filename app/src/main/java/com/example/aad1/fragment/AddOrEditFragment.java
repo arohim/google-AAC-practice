@@ -46,7 +46,7 @@ public class AddOrEditFragment extends Fragment {
 
     private int priority = 0;
 
-    private long dueDate;
+    private long dueDate = 0L;
 
     private boolean isEditing = false;
 

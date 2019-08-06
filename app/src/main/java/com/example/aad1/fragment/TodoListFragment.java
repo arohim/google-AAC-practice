@@ -17,8 +17,11 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.loader.app.LoaderManager;
 import androidx.loader.content.Loader;
+import androidx.navigation.NavController;
 import androidx.navigation.NavDirections;
+import androidx.navigation.Navigation;
 import androidx.navigation.fragment.NavHostFragment;
+import androidx.navigation.ui.NavigationUI;
 import androidx.paging.PagedList;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -119,11 +122,8 @@ public class TodoListFragment extends Fragment implements SharedPreferences.OnSh
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        if (item.getItemId() == R.id.action_settings) {
-            NavHostFragment.findNavController(TodoListFragment.this).navigate(R.id.settings);
-            return true;
-        }
-        return super.onOptionsItemSelected(item);
+        NavController navController = NavHostFragment.findNavController(TodoListFragment.this);
+        return NavigationUI.onNavDestinationSelected(item, navController);
     }
 
     @Override
