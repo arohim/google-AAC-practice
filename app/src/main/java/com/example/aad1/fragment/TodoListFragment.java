@@ -78,6 +78,7 @@ public class TodoListFragment extends Fragment implements SharedPreferences.OnSh
 
     private void setUpFloatingAction() {
         FloatingActionButton fab = getActivity().findViewById(R.id.fab);
+        fab.show();
         fab.setImageResource(R.drawable.ic_add_black_24dp);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
